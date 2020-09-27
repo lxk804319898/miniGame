@@ -36,6 +36,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean upDirection = false;
     private boolean downDirection = false;
     private boolean inGame = true;
+    private boolean isMoved = false;
 
     private Timer timer;
     private Image ball;
@@ -101,8 +102,10 @@ public class Board extends JPanel implements ActionListener {
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
                     g.drawImage(head, x[z], y[z], this);
+                    isMoved = true;
                 } else {
                     g.drawImage(ball, x[z], y[z], this);
+                    isMoved = true;
                 }
             }
 
@@ -217,28 +220,31 @@ public class Board extends JPanel implements ActionListener {
 
             int key = e.getKeyCode();
 
-            if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-                leftDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
+            if (isMoved) {
+                if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
+                    leftDirection = true;
+                    upDirection = false;
+                    downDirection = false;
+                }
 
-            if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-                rightDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
+                if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
+                    rightDirection = true;
+                    upDirection = false;
+                    downDirection = false;
+                }
 
-            if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-                upDirection = true;
-                rightDirection = false;
-                leftDirection = false;
-            }
+                if ((key == KeyEvent.VK_UP) && (!downDirection)) {
+                    upDirection = true;
+                    rightDirection = false;
+                    leftDirection = false;
+                }
 
-            if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-                downDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+                if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
+                    downDirection = true;
+                    rightDirection = false;
+                    leftDirection = false;
+                }
+                isMoved = false;
             }
         }
     }
