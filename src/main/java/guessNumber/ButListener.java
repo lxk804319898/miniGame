@@ -1,5 +1,7 @@
 package guessNumber;
 
+import snake.Snake;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +15,11 @@ public class ButListener implements ActionListener {
         this.jt = jt;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        Sucess sc = new Sucess();//新的界面（跟旧的差不多后面有代码）
-        sc.showUI(jt.getText().toCharArray()[0]-48);
+        //新的界面（跟旧的差不多后面有代码）
+        Snake sn = new Snake();
+        sn.showUI();
     }
 
 }
