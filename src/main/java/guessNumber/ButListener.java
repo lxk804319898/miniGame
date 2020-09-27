@@ -18,8 +18,8 @@ public class ButListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //新的界面（跟旧的差不多后面有代码）
-        Snake sn = new Snake();
-        sn.showUI();
+        Sucess sc = new Sucess();
+        sc.showUI(jt.getText().toCharArray()[0]-48);
     }
 
 }
