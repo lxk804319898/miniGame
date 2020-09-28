@@ -30,6 +30,10 @@ public class Board extends JPanel implements ActionListener {
     private int dots;
     private int apple_x;
     private int apple_y;
+    private int mushroom_x;
+    private int mushroom_y;
+    private int score;
+    private int apple_num;
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -42,6 +46,7 @@ public class Board extends JPanel implements ActionListener {
     private Image ball;
     private Image apple;
     private Image head;
+    private Image mushroom;
 
     public Board() {
         
@@ -69,10 +74,15 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
+
+        ImageIcon iim = new ImageIcon("src/resources/head.png");
+        mushroom = iim.getImage();
     }
 
     private void initGame() {
 
+        score = 0;
+        apple_num = 0;
         dots = 3;
 
         for (int z = 0; z < dots; z++) {
@@ -81,6 +91,7 @@ public class Board extends JPanel implements ActionListener {
         }
         
         locateApple();
+        locateMushroom();
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -98,6 +109,10 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
+
+            if (apple_num % 2 == 0 && apple_num !=0){
+                g.drawImage(mushroom, mushroom_x, mushroom_y, this);
+            }
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
@@ -119,7 +134,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void gameOver(Graphics g) {
         
-        String msg = "Game Over";
+        String msg = "Game Over 总得分:"+score;
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
@@ -128,10 +143,19 @@ public class Board extends JPanel implements ActionListener {
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
     }
 
+    private void checkMushroom(){
+        if ((x[0] == apple_x) && (y[0] == apple_y)) {
+            score+=5;
+            dots++;
+            locateMushroom();
+        }
+    }
+
     private void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
-
+            score++;
+            apple_num++;
             dots++;
             locateApple();
         }
@@ -191,6 +215,20 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    private void locateMushroom() {
+        int r = (int) (Math.random() * RAND_POS);
+        mushroom_x = ((r * DOT_SIZE));
+
+        r = (int) (Math.random() * RAND_POS);
+        mushroom_y = ((r * DOT_SIZE));
+        for (int i = 0; i < dots; i++) {
+            if (mushroom_x == x[i] && mushroom_y == y[i]) {
+                locateMushroom();
+                break;
+            }
+        }
+    }
+
     private void locateApple() {
         int r = (int) (Math.random() * RAND_POS);
         apple_x = ((r * DOT_SIZE));
@@ -211,6 +249,7 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
 
             checkApple();
+            checkMushroom();
             checkCollision();
             move();
         }

@@ -13,7 +13,7 @@ public class GameMenu extends JFrame{
         GameMenu guessNumberTest = new GameMenu();
     }
 
-    public GameMenu(){
+    private GameMenu(){
         //创建组件
         jp1 = new JPanel();
         
