@@ -165,7 +165,7 @@ public class Board extends JPanel implements ActionListener {
 
         for (int z = dots; z > 0; z--) {
 
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+            if ((z > 4) && (x[0] == x[z-1]) && (y[0] == y[z-1])) {
                 inGame = false;
             }
         }
