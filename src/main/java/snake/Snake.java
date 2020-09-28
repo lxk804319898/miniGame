@@ -18,7 +18,7 @@ public class Snake extends JFrame {
         jf.setTitle("Snake");
 
         jf.setLocationRelativeTo(null);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jf.setVisible(true);
     }
 

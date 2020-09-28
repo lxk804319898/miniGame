@@ -61,7 +61,7 @@ public class GameMenu extends JFrame{
                 JFrame jf = new JFrame();
                 jf.setTitle("猜数字");
                 jf.setSize(300, 400);
-                jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 jf.setLocationRelativeTo(null);
 
                 JTextField jtf = new JTextField();

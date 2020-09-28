@@ -11,7 +11,7 @@ public class Sucess {
         JFrame jf = new JFrame();
         jf.setTitle("正在猜数字");
         jf.setSize(300, 400);
-        jf.setDefaultCloseOperation(3);
+        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jf.setLocationRelativeTo(null);
 
         JTextField jtf=new JTextField();
