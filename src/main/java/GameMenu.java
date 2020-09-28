@@ -19,10 +19,10 @@ public class GameMenu extends JFrame{
         
         jb1 = new JButton("猜数字");
         jb2 = new JButton("贪吃蛇");
-        jb3 = new JButton("飞机大战");
+        jb3 = new JButton("打飞机");
         jb4 = new JButton("拼图");
-        jb5 = new JButton("人工智障");
-        jb6 = new JButton("重金求子");
+        jb5 = new JButton("推箱子");
+        jb6 = new JButton("叠方块");
 
         //布局
         //添加JPanel
