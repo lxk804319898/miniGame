@@ -1,4 +1,5 @@
-import ChatRoom.ChatRooms;
+import chatRoom.ChatRooms;
+import commonUtils.BackgroundPanel;
 import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
@@ -8,6 +9,7 @@ import java.awt.*;
 
 public class GameMenu extends JFrame{
 
+    private Image image=new ImageIcon("images/bg.gif").getImage();
     private JPanel  jpanel;
     private JButton guessNumber,snake,friend,jb4,jb5,jb6,mineSweeperGame;
 
@@ -18,7 +20,7 @@ public class GameMenu extends JFrame{
     private GameMenu(){
         //创建组件
         jpanel = new JPanel();
-        
+
         guessNumber = new JButton("猜数字");
         snake = new JButton("贪吃蛇");
         friend = new JButton("同城交友");
@@ -36,6 +38,8 @@ public class GameMenu extends JFrame{
          jpanel.add(jb5);
          jpanel.add(jb6);
          jpanel.add(mineSweeperGame);
+        JPanel panel = new BackgroundPanel(image); 
+ 
 
         //添加组件到边界布局BorderLayout
         this.add( jpanel,BorderLayout.CENTER);

@@ -1,4 +1,4 @@
-package ChatRoom;
+package chatRoom;
 
 import java.awt.EventQueue;
 
@@ -48,22 +48,22 @@ public class ChatRooms {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("IP\u5730\u5740\uFF1A");
+        JLabel lblNewLabel = new JLabel("IP");
         lblNewLabel.setBounds(10, 10, 54, 15);
         frame.getContentPane().add(lblNewLabel);
 
         txtF1 = new JTextField();
-        txtF1.setText("172.18.150.1");
+        txtF1.setText("172.18.150.192");
         txtF1.setBounds(55, 7, 90, 21);
         frame.getContentPane().add(txtF1);
         txtF1.setColumns(10);
 
-        JLabel jlabel = new JLabel("\u7AEF\u53E3\uFF1A");
+        JLabel jlabel = new JLabel("端口");
         jlabel.setBounds(177, 10, 54, 15);
         frame.getContentPane().add(jlabel);
 
         txtF2 = new JTextField();
-        txtF2.setText("8898");
+        txtF2.setText("8877");
         txtF2.setBounds(215, 7, 66, 21);
         frame.getContentPane().add(txtF2);
         txtF2.setColumns(10);
@@ -82,7 +82,7 @@ public class ChatRooms {
         txtare2 = new JTextArea();
         jscrollpane.setViewportView(txtare2);
 
-        JButton btnNewButton = new JButton("\u5173\u95ED");
+        JButton btnNewButton = new JButton("关闭");
         btnNewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,7 +92,7 @@ public class ChatRooms {
         btnNewButton.setBounds(153, 428, 93, 23);
         frame.getContentPane().add(btnNewButton);
 
-        JButton jbutton = new JButton("\u53D1\u9001");
+        JButton jbutton = new JButton("发送");
         jbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,18 +108,22 @@ public class ChatRooms {
                     txtare2.setText(null);
                 } catch (UnknownHostException e1) {
                     e1.printStackTrace();
+                    System.out.println("接口不可用");
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                    System.out.println("IO错误");
                 }
             }
         });
         jbutton.setBounds(294, 428, 93, 23);
         frame.getContentPane().add(jbutton);
 
-        JButton jbutton2 = new JButton("\u542F\u52A8\u670D\u52A1");
+        JButton jbutton2 = new JButton("启动服务");
         jbutton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jbutton2.setEnabled(false);
+                jbutton2.setText("服务已启动");
                 ServerThread st=new ServerThread(txtare1,txtF2);
                 st.start();
             }
