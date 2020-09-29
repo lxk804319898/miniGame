@@ -1,4 +1,4 @@
-import guessNumber.ButListener;
+import ChatRoom.ChatRooms;
 import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
@@ -9,7 +9,7 @@ import java.awt.*;
 public class GameMenu extends JFrame{
 
     private JPanel  jpanel;
-    private JButton guessNumber,snake,jb3,jb4,jb5,jb6,mineSweeperGame;
+    private JButton guessNumber,snake,friend,jb4,jb5,jb6,mineSweeperGame;
 
     public static void main(String[] args) {
         GameMenu guessNumberTest = new GameMenu();
@@ -21,7 +21,7 @@ public class GameMenu extends JFrame{
         
         guessNumber = new JButton("猜数字");
         snake = new JButton("贪吃蛇");
-        jb3 = new JButton("打飞机");
+        friend = new JButton("同城交友");
         jb4 = new JButton("拼图");
         jb5 = new JButton("推箱子");
         jb6 = new JButton("叠方块");
@@ -31,7 +31,7 @@ public class GameMenu extends JFrame{
         //添加JPanel
          jpanel.add(guessNumber);
          jpanel.add(snake);
-         jpanel.add(jb3);
+         jpanel.add(friend);
          jpanel.add(jb4);
          jpanel.add(jb5);
          jpanel.add(jb6);
@@ -49,7 +49,7 @@ public class GameMenu extends JFrame{
 
         addActionListener(guessNumber);
         addActionListener(snake);
-        addActionListener(jb3);
+        addActionListener(friend);
         addActionListener(jb4);
         addActionListener(jb5);
         addActionListener(jb6);
@@ -70,6 +70,8 @@ public class GameMenu extends JFrame{
                 sn.showUI();
             } else if (e.getSource() == mineSweeperGame){
                 new MineSweeperMain();
+            } else if (e.getSource() == friend){
+                new ChatRooms();
             }
         });
     }
