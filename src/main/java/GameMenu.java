@@ -9,7 +9,7 @@ import java.awt.*;
 public class GameMenu extends JFrame{
 
     private JPanel  jpanel;
-    private JButton guessNumber,snake,friend,jb4,jb5,jb6,mineSweeperGame;
+    private JButton guessNumber,snake,friend,jb4,jb5,jb6,mineSweeperGame,rememberCardBtn;
 
     public static void main(String[] args) {
         GameMenu guessNumberTest = new GameMenu();
@@ -26,6 +26,7 @@ public class GameMenu extends JFrame{
         jb5 = new JButton("推箱子");
         jb6 = new JButton("叠方块");
         mineSweeperGame = new JButton("扫雷");
+        rememberCardBtn = new JButton("翻牌记忆");
 
         //布局
         //添加JPanel
@@ -36,6 +37,7 @@ public class GameMenu extends JFrame{
          jpanel.add(jb5);
          jpanel.add(jb6);
          jpanel.add(mineSweeperGame);
+         jpanel.add(rememberCardBtn);
 
         //添加组件到边界布局BorderLayout
         this.add( jpanel,BorderLayout.CENTER);
@@ -54,6 +56,7 @@ public class GameMenu extends JFrame{
         addActionListener(jb5);
         addActionListener(jb6);
         addActionListener(mineSweeperGame);
+        addActionListener(rememberCardBtn);
         //显示
         this.setVisible(true);
     }
@@ -70,6 +73,8 @@ public class GameMenu extends JFrame{
                 sn.showUI();
             } else if (e.getSource() == mineSweeperGame){
                 new MineSweeperMain();
+            } else if (e.getSource() == rememberCardBtn){
+                StartRCCardGame.start();
             } else if (e.getSource() == friend){
                 new ChatRooms();
             }
