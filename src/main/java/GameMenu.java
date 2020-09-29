@@ -1,4 +1,5 @@
 import guessNumber.ButListener;
+import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 public class GameMenu extends JFrame{
 
     private JPanel jp1;
-    private JButton jb1,jb2,jb3,jb4,jb5,jb6;
+    private JButton jb1,jb2,jb3,jb4,jb5,jb6,mineSweeperGame;
 
     public static void main(String[] args) {
         GameMenu guessNumberTest = new GameMenu();
@@ -23,6 +24,7 @@ public class GameMenu extends JFrame{
         jb4 = new JButton("拼图");
         jb5 = new JButton("推箱子");
         jb6 = new JButton("叠方块");
+        mineSweeperGame = new JButton("扫雷");
 
         //布局
         //添加JPanel
@@ -32,6 +34,7 @@ public class GameMenu extends JFrame{
         jp1.add(jb4);
         jp1.add(jb5);
         jp1.add(jb6);
+        jp1.add(mineSweeperGame);
 
         //添加组件到边界布局BorderLayout
         this.add(jp1,BorderLayout.CENTER);
@@ -49,6 +52,7 @@ public class GameMenu extends JFrame{
         addActionListener(jb4);
         addActionListener(jb5);
         addActionListener(jb6);
+        addActionListener(mineSweeperGame);
         //显示
         this.setVisible(true);
     }
@@ -88,6 +92,8 @@ public class GameMenu extends JFrame{
             }else if (e.getSource() == jb2){
                 Snake sn = new Snake();
                 sn.showUI();
+            } else if (e.getSource() == mineSweeperGame){
+                new MineSweeperMain();
             }
         });
     }
