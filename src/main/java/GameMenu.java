@@ -1,4 +1,5 @@
 import guessNumber.ButListener;
+import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
 
@@ -7,8 +8,8 @@ import java.awt.*;
 
 public class GameMenu extends JFrame{
 
-    private JPanel jp1;
-    private JButton jb1,jb2,jb3,jb4,jb5,jb6,mineSweeperGame;
+    private JPanel  jpanel;
+    private JButton guessNumber,snake,jb3,jb4,jb5,jb6,mineSweeperGame;
 
     public static void main(String[] args) {
         GameMenu guessNumberTest = new GameMenu();
@@ -16,10 +17,10 @@ public class GameMenu extends JFrame{
 
     private GameMenu(){
         //创建组件
-        jp1 = new JPanel();
+        jpanel = new JPanel();
         
-        jb1 = new JButton("猜数字");
-        jb2 = new JButton("贪吃蛇");
+        guessNumber = new JButton("猜数字");
+        snake = new JButton("贪吃蛇");
         jb3 = new JButton("打飞机");
         jb4 = new JButton("拼图");
         jb5 = new JButton("推箱子");
@@ -28,16 +29,16 @@ public class GameMenu extends JFrame{
 
         //布局
         //添加JPanel
-        jp1.add(jb1);
-        jp1.add(jb2);
-        jp1.add(jb3);
-        jp1.add(jb4);
-        jp1.add(jb5);
-        jp1.add(jb6);
-        jp1.add(mineSweeperGame);
+         jpanel.add(guessNumber);
+         jpanel.add(snake);
+         jpanel.add(jb3);
+         jpanel.add(jb4);
+         jpanel.add(jb5);
+         jpanel.add(jb6);
+         jpanel.add(mineSweeperGame);
 
         //添加组件到边界布局BorderLayout
-        this.add(jp1,BorderLayout.CENTER);
+        this.add( jpanel,BorderLayout.CENTER);
 
         //窗体设置
         this.setTitle("闽侯渔业中心");
@@ -46,8 +47,8 @@ public class GameMenu extends JFrame{
         this.setLocation(200,200);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        addActionListener(jb1);
-        addActionListener(jb2);
+        addActionListener(guessNumber);
+        addActionListener(snake);
         addActionListener(jb3);
         addActionListener(jb4);
         addActionListener(jb5);
@@ -60,36 +61,11 @@ public class GameMenu extends JFrame{
     private void addActionListener(JButton saveButton) {
         // 为按钮绑定监听器
         saveButton.addActionListener(e -> {
-            if (e.getSource() == jb1){
-                // 对话框
-                JFrame jf = new JFrame();
-                jf.setTitle("猜数字");
-                jf.setSize(300, 400);
-                jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                jf.setLocationRelativeTo(null);
-
-                JTextField jtf = new JTextField();
-                Dimension dm1 = new Dimension(280, 30);
-                jtf.setPreferredSize(dm1);
-                jf.add(jtf);
-
-                FlowLayout flow = new FlowLayout();
-                jf.setLayout(flow);
-
-                JButton jbu = new JButton("开始");
-                Dimension dm3 = new Dimension(80, 30);
-                jbu.setPreferredSize(dm3);
-                jf.add(jbu);
-
-                //给按钮添加动作监听器方法
-                ButListener but = new ButListener();
-                //创建一个监听器
-                jbu.addActionListener(but);
-                but.setJt(jtf);
-
-                //设置可见，放在代码最后一句
-                jf.setVisible(true);
-            }else if (e.getSource() == jb2){
+            if (e.getSource() == guessNumber){
+                //默认为5
+                Sucess sc = new Sucess();
+                sc.showUI(5);
+            }else if (e.getSource() == snake){
                 Snake sn = new Snake();
                 sn.showUI();
             } else if (e.getSource() == mineSweeperGame){
