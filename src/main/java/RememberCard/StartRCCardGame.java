@@ -12,7 +12,7 @@ public class StartRCCardGame {
                 RememberCard remCard = new RememberCard();
                 remCard.setSize(500, 600);
                 remCard.setLocationRelativeTo(null);
-                remCard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                remCard.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 remCard.setVisible(true);
             }
         });
