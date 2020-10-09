@@ -25,10 +25,6 @@ public class CountDown {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date date = simpleDateFormat.parse(dateStr);
-            if (date.getTime() <= System.currentTimeMillis()) {
-                jl0.setText("时间不能早于现在" + dateStr);
-                throw new IllegalArgumentException("时间不能早于现在" + dateStr);
-            }
             return date;
         } catch (ParseException e) {
             jl0.setText("时间格式传入错误,如yyyy-MM-dd HH:mm:ss，" + dateStr);
@@ -39,29 +35,63 @@ public class CountDown {
     public void initTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00");
+        timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00" , simpleDateFormat.format(date)+" "+"14:00:00");
     }
 
-    private void timer(String dateStr, String dateMid) {
+    private void timer(String dateStr ,String dateMid ,String dateMidEnd) {
         Date end = stringToDate(dateStr);
         Date mid = stringToDate(dateMid);
+        Date midEnd = stringToDate(dateMidEnd);
+        String endWarn = "已到达下班时间！";
+        String midWarn = "已到达午休时间！";
+        String midEndWarn = "午休时间已过！";
         scheduled.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
+                StringBuffer showText = new StringBuffer("<html><br>");
+                // 判断午休
+                long midTime = (mid.getTime() - 1 - System.currentTimeMillis()) / 1000;
+                long midEndTime = (midEnd.getTime() - 1 - System.currentTimeMillis()) / 1000;
+                if(midTime <= 0 && midEndTime <= 0) {
+                    showText.append(midEndWarn + "<br><br>");
+                }
+                if(midTime <= 0 && midEndTime > 0){
+                    long midEndHour = midEndTime / 3600;
+                    long midEndMinute = (midEndTime - midEndHour * 3600) / 60;
+                    long midEndSeconds = midEndTime - midEndHour * 3600 - midEndMinute * 60;
+                    showText.append("距离 午休结束"+ dateMidEnd + "还有<br>" +
+                            midEndHour + "时 " + midEndMinute + "分 " + midEndSeconds + "秒 " +
+                            "<br><br>");
+                }
+                if(midTime > 0){
+                    long midHour = midTime / 3600;
+                    long midMinute = (midTime - midHour * 3600) / 60;
+                    long midSeconds = midTime - midHour * 3600 - midMinute * 60;
+                    showText.append("距离 午休开始"+ dateMid + "还有<br>" +
+                            midHour + "时 " + midMinute + "分 " + midSeconds + "秒 " +
+                            "<br><br>");
+                }
+
+                // 判断下班
                 long time = (end.getTime() - 1 - System.currentTimeMillis()) / 1000;
                 if (time <= 0) {
                     stopTimer();
-                    jl0.setText("到达指定时间点" + dateStr);
-                    return;
+                    showText.append(endWarn + "<br>");
+                }else{
+                    long hour = time / 3600;
+                    long minute = (time - hour * 3600) / 60;
+                    long seconds = time - hour * 3600 - minute * 60;
+                    showText.append("距离 下班"+ dateStr + "还有<br>" +
+                            hour + "时 " + minute + "分 " + seconds + "秒 " +
+                            "</html>");
                 }
-                long hour = time / 3600;
-                long minute = (time - hour * 3600) / 60;
-                long seconds = time - hour * 3600 - minute * 60;
 
-                String stringBuilder = "<html><br>距离" + dateStr + "还有<br><br>" +
-                        hour + "时 " + minute + "分 " + seconds + "秒 " +
-                        "</html>";
-                jl0.setText(stringBuilder);
+
+//                String stringBuilder = "<html><br>距离" + dateStr + "还有<br><br>" +
+//                        hour + "时 " + minute + "分 " + seconds + "秒 " +
+//                        "</html>";
+
+                jl0.setText(showText.toString());
             }
         }, 0, 1, TimeUnit.SECONDS);
 
