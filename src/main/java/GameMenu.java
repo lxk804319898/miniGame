@@ -1,5 +1,6 @@
 import chatRoom.ChatRooms;
 import RememberCard.StartRCCardGame;
+import countDown.CountDown;
 import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
@@ -10,10 +11,10 @@ import java.awt.*;
 public class GameMenu extends JFrame{
 
     private JPanel  jpanel;
-    private JButton guessNumber,snake,friend,jb4,jb5,jb6,mineSweeperGame,rememberCardBtn;
+    private JButton guessNumber,snake,friend,jb4,jb5,countDown,mineSweeperGame,rememberCardBtn;
 
     public static void main(String[] args) {
-        GameMenu guessNumberTest = new GameMenu();
+        GameMenu gameMenu = new GameMenu();
     }
 
     private GameMenu(){
@@ -25,7 +26,7 @@ public class GameMenu extends JFrame{
         friend = new JButton("同城交友");
         jb4 = new JButton("拼图");
         jb5 = new JButton("推箱子");
-        jb6 = new JButton("叠方块");
+        countDown = new JButton("倒计时");
         mineSweeperGame = new JButton("扫雷");
         rememberCardBtn = new JButton("翻牌记忆");
 
@@ -36,7 +37,7 @@ public class GameMenu extends JFrame{
          jpanel.add(friend);
          jpanel.add(jb4);
          jpanel.add(jb5);
-         jpanel.add(jb6);
+         jpanel.add(countDown);
          jpanel.add(mineSweeperGame);
          jpanel.add(rememberCardBtn);
 
@@ -55,7 +56,7 @@ public class GameMenu extends JFrame{
         addActionListener(friend);
         addActionListener(jb4);
         addActionListener(jb5);
-        addActionListener(jb6);
+        addActionListener(countDown);
         addActionListener(mineSweeperGame);
         addActionListener(rememberCardBtn);
         //显示
@@ -78,6 +79,9 @@ public class GameMenu extends JFrame{
                 StartRCCardGame.start();
             } else if (e.getSource() == friend){
                 new ChatRooms();
+            } else if (e.getSource() == countDown){
+                CountDown countDown = new CountDown();
+                countDown.initTime();
             }
         });
     }
