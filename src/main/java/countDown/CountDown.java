@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 倒计时
  * @author masgak
- * @todo 中午倒计时需求，会开两个窗口的bug
+ * @todo 中午倒计时需求
  */
 public class CountDown {
 
@@ -39,7 +39,7 @@ public class CountDown {
     public void initTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        new CountDown().timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00");
+        timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00");
     }
 
     private void timer(String dateStr, String dateMid) {
