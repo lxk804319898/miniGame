@@ -77,9 +77,7 @@ public class MineGameUtils {
 
 	// 初始化所有格子
 	private void resetOrCreateGrids(int rowNums, int columnNums) {
-		if (beanArr == null) {
-			beanArr = new MineBean[rowNums][columnNums];
-		}
+		beanArr = new MineBean[rowNums][columnNums];
 		for (int i = 0; i < beanArr.length; i++) {
 			for (int j = 0; j < beanArr[i].length; j++) {
 				if (beanArr[i][j] == null) {

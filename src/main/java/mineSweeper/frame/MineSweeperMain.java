@@ -3,21 +3,17 @@ package mineSweeper.frame;
 import mineSweeper.arithmetic.MineGameUtils;
 import mineSweeper.bean.MineBean;
 import mineSweeper.bean.MineImage;
+import mineSweeper.bean.MineLevel;
 import mineSweeper.bean.MineType;
 import mineSweeper.listener.MyMouseListener;
 import mineSweeper.tools.SizeTools;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 /**
@@ -27,9 +23,9 @@ import javax.swing.JPanel;
  */
 public class MineSweeperMain extends JFrame {
 	private static final long serialVersionUID = -125417968666795289L;
-	public final int mMineCount = 75;// 雷子个数
-	public final int mRowNums = 25;// 格子行数
-	public final int mColumnNums = 30;// 格子列数
+	public int mMineCount = 10;// 雷子个数
+	public int mRowNums = 9;// 格子行数
+	public int mColumnNums = 9;// 格子列数
 
 	public final int mGridSideLength = 25;// 格子的边长
 
@@ -37,6 +33,8 @@ public class MineSweeperMain extends JFrame {
 	private JButton resetBtn;
 
 	private boolean isClickComplete = true;
+
+	private MineLevel mineLevel = MineLevel.EASY;
 
 	private int mWidth;
 	private int mHeight;
@@ -51,6 +49,18 @@ public class MineSweeperMain extends JFrame {
 	}
 
 	public MineSweeperMain() {
+		init();
+	}
+
+	public void init() {
+		getContentPane().removeAll();
+
+		String mineInfo = mineLevel.getMineInfo();
+		String[] mineInfos = mineInfo.split("_");
+		this.mRowNums = Integer.valueOf(mineInfos[0]);
+		this.mColumnNums = Integer.valueOf(mineInfos[1]);
+		this.mMineCount = Integer.valueOf(mineInfos[2]);
+
 		// 初始化UI对应的背景数组状态
 		gameUtils = new MineGameUtils(mMineCount, mRowNums, mColumnNums, callback);
 
@@ -58,6 +68,7 @@ public class MineSweeperMain extends JFrame {
 		mHeight = mRowNums * mGridSideLength;
 
 		this.setResizable(false);
+		this.setMenuBar(initMenuBar());
 		this.setTitle(GAME_TITLE);
 		this.setIconImage(SizeTools.getLogo());
 		Dimension dimension = SizeTools.getScreenSize();
@@ -72,6 +83,41 @@ public class MineSweeperMain extends JFrame {
 		this.add(centerLayout(), BorderLayout.CENTER);
 		// 显示窗口
 		this.setVisible(true);
+		repaint();
+	}
+
+	public MenuBar initMenuBar() {
+		MenuBar menuBar = new MenuBar();
+		Menu menu = new Menu("选项");
+		MenuItem level1Btn = new MenuItem("初级");
+		level1Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setMineLevel(MineLevel.EASY);
+				init();
+			}
+		});
+		MenuItem level2Btn = new MenuItem("中级");
+		level2Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setMineLevel(MineLevel.NORMAL);
+				init();
+			}
+		});
+		MenuItem level3Btn = new MenuItem("高级");
+		level3Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setMineLevel(MineLevel.HARD);
+				init();
+			}
+		});
+		menu.add(level1Btn);
+		menu.add(level2Btn);
+		menu.add(level3Btn);
+		menuBar.add(menu);
+		return menuBar;
 	}
 
 	public JPanel topLayout() {
@@ -135,9 +181,7 @@ public class MineSweeperMain extends JFrame {
 
 	private void initButtons() {
 		isClickComplete = true;
-		if (buttonArr == null) {
-			buttonArr = new JButton[mRowNums][mColumnNums];
-		}
+		buttonArr = new JButton[mRowNums][mColumnNums];
 		for (int i = 0; i < mRowNums; i++) {
 			for (int j = 0; j < mColumnNums; j++) {
 				if (buttonArr[i][j] == null) {
@@ -215,4 +259,12 @@ public class MineSweeperMain extends JFrame {
 			setButtonImage(buttonArr[i][j], mineBean.getImageStatus());
 		}
 	};
+
+	public MineLevel getMineLevel() {
+		return mineLevel;
+	}
+
+	public void setMineLevel(MineLevel mineLevel) {
+		this.mineLevel = mineLevel;
+	}
 }
