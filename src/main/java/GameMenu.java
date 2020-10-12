@@ -10,8 +10,12 @@ import java.awt.*;
 
 public class GameMenu extends JFrame{
 
-    private JPanel  jpanel;
-    private JButton guessNumber,snake,friend,jb4,jb5,countDown,mineSweeperGame,rememberCardBtn;
+    private JButton guessNumber;
+    private JButton snake;
+    private JButton friend;
+    private JButton countDown;
+    private JButton mineSweeperGame;
+    private JButton rememberCardBtn;
 
     public static void main(String[] args) {
         GameMenu gameMenu = new GameMenu();
@@ -19,18 +23,17 @@ public class GameMenu extends JFrame{
 
     private GameMenu(){
         //创建组件
-        jpanel = new JPanel();
+        JPanel jpanel = new JPanel();
 
         guessNumber = new JButton("猜数字");
         snake = new JButton("贪吃蛇");
         friend = new JButton("同城交友");
-        jb4 = new JButton("拼图");
-        jb5 = new JButton("推箱子");
+        JButton jb4 = new JButton("拼图");
+        JButton jb5 = new JButton("推箱子");
         countDown = new JButton("倒计时");
         mineSweeperGame = new JButton("扫雷");
         rememberCardBtn = new JButton("翻牌记忆");
 
-        //布局
         //添加JPanel
          jpanel.add(guessNumber);
          jpanel.add(snake);
@@ -42,7 +45,7 @@ public class GameMenu extends JFrame{
          jpanel.add(rememberCardBtn);
 
         //添加组件到边界布局BorderLayout
-        this.add( jpanel,BorderLayout.CENTER);
+        this.add(jpanel,BorderLayout.CENTER);
 
         //窗体设置
         this.setTitle("闽侯渔业中心");

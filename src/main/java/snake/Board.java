@@ -1,5 +1,8 @@
 package snake;
 
+import commonUtils.Jdbc;
+import commonUtils.User;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -51,8 +54,7 @@ public class Board extends JPanel implements ActionListener {
     private Image mushroom;
     private Image award;
 
-    public Board() {
-        
+    Board() {
         initBoard();
     }
     
@@ -153,6 +155,10 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
         
         String msg = "Game Over 总得分:"+score;
+        if (User.name != null){
+            Jdbc jdbc  = new Jdbc();
+            jdbc.insertScore("Snake",score);
+        }
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
