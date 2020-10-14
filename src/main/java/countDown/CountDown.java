@@ -1,8 +1,7 @@
 package countDown;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class CountDown {
     public void initTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00" , simpleDateFormat.format(date)+" "+"14:00:00");
+        timer(simpleDateFormat.format(date)+" "+"15:38:00",simpleDateFormat.format(date)+" "+"11:56:00" , simpleDateFormat.format(date)+" "+"14:00:00");
     }
 
     private void timer(String dateStr ,String dateMid ,String dateMidEnd) {
@@ -75,8 +74,9 @@ public class CountDown {
                 // 判断下班
                 long time = (end.getTime() - 1 - System.currentTimeMillis()) / 1000;
                 if (time <= 0) {
-                    stopTimer();
-                    showText.append(endWarn + "<br>");
+                    stopTimer(true);
+                    //showText.append(endWarn + "<br>");
+                    //showText.append("<img src=\"src/resources/CountDownResources/apple.png\" />");
                 }else{
                     long hour = time / 3600;
                     long minute = (time - hour * 3600) / 60;
@@ -100,10 +100,15 @@ public class CountDown {
     /**
      * 停止定时器
      */
-    private void stopTimer() {
-        if (scheduled != null) {
-            scheduled.shutdownNow();
-            scheduled = null;
+    private void stopTimer(boolean isFinished) {
+        if(isFinished) {
+            ImageIcon icon = new ImageIcon("src/resources/CountDownResources/paolu.png");
+            icon.setImage(icon.getImage().getScaledInstance(180, 150, Image.SCALE_DEFAULT));
+            jl0.setIcon(icon);
+            if (scheduled != null) {
+                scheduled.shutdownNow();
+                scheduled = null;
+            }
         }
     }
     
