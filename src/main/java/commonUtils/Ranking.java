@@ -1,8 +1,17 @@
 package commonUtils;
 
 public class Ranking {
-    private String name;
-    private Integer scores;
+    private String gameName; //游戏名
+    private String name;     //水B名
+    private Integer scores;  //分数
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
 
     public String getName() {
         return name;
@@ -23,7 +32,8 @@ public class Ranking {
     @Override
     public String toString() {
         return "Ranking{" +
-                "name='" + name + '\'' +
+                "gameName='" + gameName + '\'' +
+                ", name='" + name + '\'' +
                 ", scores=" + scores +
                 '}';
     }

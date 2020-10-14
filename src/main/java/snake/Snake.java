@@ -1,12 +1,13 @@
 package snake;
 
 import commonUtils.Jdbc;
+import commonUtils.Ranking;
 import guessNumber.ButListener;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * @author masgak
@@ -33,7 +34,6 @@ public class Snake extends JFrame {
         jMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jf.dispose();
                 showRanking();
             }
         });
@@ -45,15 +45,25 @@ public class Snake extends JFrame {
     }
 
     private void showRanking(){
-        JFrame jFrame = new JFrame("排行榜");
+        JFrame jFrame = new JFrame("Snake排行榜");
         JLabel jl0 = new JLabel();
 
         JPanel jp = new JPanel();
         Jdbc jdbc = new Jdbc();
-        jdbc.queryRanking("Snake");
         StringBuffer showText = new StringBuffer("<html><br>");
-        showText.append("排行<br>排行 " +
-                "</html>");
+        showText.append("--  == Snake排行 == --<br> ");
+
+        List<Ranking> rankList = jdbc.queryRanking("Snake");
+        if(rankList.size() != 0){
+            showText.append("<br> ---名称- --- -分数---<br>");
+            for(Ranking ranking : rankList){
+                showText.append("<br>---" + ranking.getName() +" --- " + ranking.getScores() + "---<br>");
+            }
+        }else{
+            showText.append("<br> --暂无排行-- <br>");
+        }
+        showText.append("</html>");
+
         jl0.setText(showText.toString());
         jp.add(jl0);
 
@@ -61,7 +71,7 @@ public class Snake extends JFrame {
 
         jFrame.setVisible(true);
         jFrame.setLocation(300, 400);
-        jFrame.setSize(330, 200);
+        jFrame.setSize(330, 500);
         jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 

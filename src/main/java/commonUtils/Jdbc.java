@@ -42,15 +42,36 @@ public class Jdbc {
             resultSet = statement.executeQuery(sql);
             ResultSetMetaData md = resultSet.getMetaData();
             int columnCount = md.getColumnCount();
-            if (resultSet.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    Ranking ranking = new Ranking();
-                    ranking.setName(resultSet.getString(i));
-                    ranking.setScores(0);
-                    list.add(ranking);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "用户不存在！");
+            Ranking ranking = null;
+            while (resultSet.next()) {
+                ranking = new Ranking();
+                ranking.setGameName(resultSet.getString(1));
+                ranking.setName(resultSet.getString(3));
+                ranking.setScores(resultSet.getInt(2));
+                list.add(ranking);
+            }
+            resultSet.close();
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //获取全部游戏排行
+    public List<Ranking> queryTotalRanking(){
+        List<Ranking> list = new ArrayList<>();
+        String sql = "select * from ranking order by scores desc limit 10";
+        try {
+            resultSet = statement.executeQuery(sql);
+            Ranking ranking = null;
+            while (resultSet.next()) {
+                ranking = new Ranking();
+                ranking.setGameName(resultSet.getString(1));
+                ranking.setName(resultSet.getString(2));
+                ranking.setScores(resultSet.getInt(3));
+                list.add(ranking);
             }
             resultSet.close();
             connection.close();
@@ -148,6 +169,19 @@ public class Jdbc {
             JOptionPane.showMessageDialog(null, "注册账号为空，请重新输入！");
             return;
         }
+        String checkUserSql = "select id from user where name =\"" + name + "\"";
+        try{
+            resultSet = statement.executeQuery(checkUserSql);
+            if (resultSet.next()) {
+                JOptionPane.showMessageDialog(null, "该水B已存在，请重新输入！");
+                connection.close();
+                statement.close();
+                return;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         SnowFlake snowFlake = new SnowFlake(2,3);
         Long ID = snowFlake.nextId();
         String sql = "insert into user(ID, name,password) values(\"" + ID + "\",\"" + name + "\",\"" + password + "\")";
