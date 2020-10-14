@@ -34,7 +34,7 @@ public class CountDown {
     public void initTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        timer(simpleDateFormat.format(date)+" "+"15:38:00",simpleDateFormat.format(date)+" "+"11:56:00" , simpleDateFormat.format(date)+" "+"14:00:00");
+        timer(simpleDateFormat.format(date)+" "+"18:10:00",simpleDateFormat.format(date)+" "+"11:56:00" , simpleDateFormat.format(date)+" "+"14:00:00");
     }
 
     private void timer(String dateStr ,String dateMid ,String dateMidEnd) {
