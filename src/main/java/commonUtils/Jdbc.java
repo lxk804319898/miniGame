@@ -69,8 +69,8 @@ public class Jdbc {
             while (resultSet.next()) {
                 ranking = new Ranking();
                 ranking.setGameName(resultSet.getString(1));
-                ranking.setName(resultSet.getString(2));
-                ranking.setScores(resultSet.getInt(3));
+                ranking.setName(resultSet.getString(3));
+                ranking.setScores(resultSet.getInt(2));
                 list.add(ranking);
             }
             resultSet.close();

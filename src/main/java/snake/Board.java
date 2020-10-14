@@ -147,7 +147,6 @@ public class Board extends JPanel implements ActionListener {
             Toolkit.getDefaultToolkit().sync();
 
         } else {
-
             gameOver(g);
         }        
     }
@@ -159,6 +158,7 @@ public class Board extends JPanel implements ActionListener {
             Jdbc jdbc  = new Jdbc();
             jdbc.insertScore("Snake",score);
         }
+
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 

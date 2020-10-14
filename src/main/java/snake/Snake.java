@@ -21,10 +21,14 @@ public class Snake extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("选项");
         JMenuItem jMenuItem = new JMenuItem("查看排行榜");
+        JMenuItem beginItem = new JMenuItem("开始");
+        menu.add(beginItem);
         menu.add(jMenuItem);
         menuBar.add(menu);
 
-        jf.add(new Board());
+        Board board = new Board();
+
+        jf.add(board);
 
         jf.setResizable(false);
         jf.pack();
@@ -37,6 +41,13 @@ public class Snake extends JFrame {
                 showRanking();
             }
         });
+
+//        beginItem.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                showRanking();
+//            }
+//        });
 
         jf.setLocationRelativeTo(null);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

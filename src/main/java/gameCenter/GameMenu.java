@@ -1,3 +1,5 @@
+package gameCenter;
+
 import chatRoom.ChatRooms;
 import RememberCard.StartRCCardGame;
 import countDown.CountDown;
@@ -21,7 +23,7 @@ public class GameMenu extends JFrame{
         GameMenu gameMenu = new GameMenu();
     }
 
-    private GameMenu(){
+    public GameMenu(){
         //创建组件
         JPanel jpanel = new JPanel();
 

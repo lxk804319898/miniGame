@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commonUtils.User;
+import gameCenter.GameMenu;
 import snake.Snake;
 
 import javax.swing.*;
@@ -73,8 +74,9 @@ public class Login extends JFrame implements ActionListener {
         if (d.compare(username, password)) {
             User.name = username;
             super.setVisible(false);
-            Snake sn = new Snake();
-            sn.showUI();
+//            Snake sn = new Snake();
+//            sn.showUI();
+            GameMenu gameMenu = new GameMenu();
         }
     }
 
