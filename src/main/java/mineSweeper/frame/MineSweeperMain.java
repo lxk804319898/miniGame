@@ -68,7 +68,7 @@ public class MineSweeperMain extends JFrame {
 		mHeight = mRowNums * mGridSideLength;
 
 		this.setResizable(false);
-		this.setMenuBar(initMenuBar());
+		this.setJMenuBar(initMenuBar());
 		this.setTitle(GAME_TITLE);
 		this.setIconImage(SizeTools.getLogo());
 		Dimension dimension = SizeTools.getScreenSize();
@@ -83,13 +83,13 @@ public class MineSweeperMain extends JFrame {
 		this.add(centerLayout(), BorderLayout.CENTER);
 		// 显示窗口
 		this.setVisible(true);
-		repaint();
+		//repaint();
 	}
 
-	public MenuBar initMenuBar() {
-		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("选项");
-		MenuItem level1Btn = new MenuItem("初级");
+	public JMenuBar initMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("选项");
+		JMenuItem level1Btn = new JMenuItem("初级");
 		level1Btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -97,7 +97,7 @@ public class MineSweeperMain extends JFrame {
 				init();
 			}
 		});
-		MenuItem level2Btn = new MenuItem("中级");
+		JMenuItem level2Btn = new JMenuItem("中级");
 		level2Btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -105,7 +105,7 @@ public class MineSweeperMain extends JFrame {
 				init();
 			}
 		});
-		MenuItem level3Btn = new MenuItem("高级");
+		JMenuItem level3Btn = new JMenuItem("高级");
 		level3Btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -144,7 +144,7 @@ public class MineSweeperMain extends JFrame {
 				if (gameUtils == null) {
 					return;
 				}
-				gameUtils.reset();
+				gameUtils.reset(true);
 			}
 		});
 		panel.add(resetBtn);
@@ -179,9 +179,11 @@ public class MineSweeperMain extends JFrame {
 		return panel;
 	}
 
-	private void initButtons() {
+	private void initButtons(boolean isReset) {
 		isClickComplete = true;
-		buttonArr = new JButton[mRowNums][mColumnNums];
+		if(!isReset) {
+			buttonArr = new JButton[mRowNums][mColumnNums];
+		}
 		for (int i = 0; i < mRowNums; i++) {
 			for (int j = 0; j < mColumnNums; j++) {
 				if (buttonArr[i][j] == null) {
@@ -221,44 +223,43 @@ public class MineSweeperMain extends JFrame {
 	}
 
 	private MineGameUtils.CallBack callback = new MineGameUtils.CallBack() {
-
-		@Override
-		public void onWin(long time) {
-			if (resetBtn != null) {
-				setButtonImage(resetBtn, MineType.MINE_STATUS_WIN);
+			@Override
+			public void onWin(long time) {
+				if (resetBtn != null) {
+					setButtonImage(resetBtn, MineType.MINE_STATUS_WIN);
+				}
+				JOptionPane.showMessageDialog(MineSweeperMain.this, "胜利! 用时: " + time / 1000 + " 秒");
 			}
-			JOptionPane.showMessageDialog(MineSweeperMain.this, "胜利! 用时: " + time / 1000 + " 秒");
-		}
 
-		@Override
-		public void onInit() {
-			initButtons();
-		}
-
-		@Override
-		public void onGameOver() {
-			if (resetBtn != null) {
-				setButtonImage(resetBtn, MineType.MINE_STATUS_DEAD);
+			@Override
+			public void onInit(boolean isReset) {
+				initButtons(isReset);
 			}
-			JOptionPane.showMessageDialog(MineSweeperMain.this, "好像是输了?!");
-		}
 
-		@Override
-		public void onLeftClick(MineBean mineBean, int i, int j) {
-			if (buttonArr == null || mineBean == null) {
-				return;
+			@Override
+			public void onGameOver() {
+				if (resetBtn != null) {
+					setButtonImage(resetBtn, MineType.MINE_STATUS_DEAD);
+				}
+				JOptionPane.showMessageDialog(MineSweeperMain.this, "好像是输了?!");
 			}
-			setButtonImage(buttonArr[i][j], mineBean.getMineCount());
-		}
 
-		@Override
-		public void onRightClick(MineBean mineBean, int i, int j) {
-			if (buttonArr == null || mineBean == null) {
-				return;
+			@Override
+			public void onLeftClick(MineBean mineBean, int i, int j) {
+				if (buttonArr == null || mineBean == null) {
+					return;
+				}
+				setButtonImage(buttonArr[i][j], mineBean.getMineCount());
 			}
-			setButtonImage(buttonArr[i][j], mineBean.getImageStatus());
-		}
-	};
+
+			@Override
+			public void onRightClick(MineBean mineBean, int i, int j) {
+				if (buttonArr == null || mineBean == null) {
+					return;
+				}
+				setButtonImage(buttonArr[i][j], mineBean.getImageStatus());
+			}
+		};
 
 	public MineLevel getMineLevel() {
 		return mineLevel;

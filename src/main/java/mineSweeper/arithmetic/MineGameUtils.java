@@ -59,10 +59,10 @@ public class MineGameUtils {
 		this.callBack = callBack;
 
 		// 初始化
-		reset();
+		reset(false);
 	}
 
-	public void reset() {
+	public void reset(boolean isReset) {
 		resetOrCreateGrids(mRowNums, mColumnNums);
 		makeRandomMines();
 		initGridAroundStatus();
@@ -71,13 +71,15 @@ public class MineGameUtils {
 		gameStartTime = 0;
 		isGameOver = false;
 		if (this.callBack != null) {
-			this.callBack.onInit();
+			this.callBack.onInit(isReset);
 		}
 	}
 
 	// 初始化所有格子
 	private void resetOrCreateGrids(int rowNums, int columnNums) {
-		beanArr = new MineBean[rowNums][columnNums];
+	    if(beanArr == null) {
+            beanArr = new MineBean[rowNums][columnNums];
+        }
 		for (int i = 0; i < beanArr.length; i++) {
 			for (int j = 0; j < beanArr[i].length; j++) {
 				if (beanArr[i][j] == null) {
@@ -316,7 +318,7 @@ public class MineGameUtils {
 	}
 
 	public interface CallBack {
-		void onInit();
+		void onInit(boolean isReset);
 
 		void onWin(long time);// 胜利
 
