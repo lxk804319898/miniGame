@@ -63,7 +63,7 @@ public class Jdbc {
     //获取全部游戏排行
     public List<Ranking> queryTotalRanking(){
         List<Ranking> list = new ArrayList<>();
-        String sql = "select * from ranking order by scores desc limit 10";
+        String sql = "select * from ranking a where (select count(id) from ranking b where a.game = b.game and b.scores > a.scores) < 10 order by scores desc";
         try {
             resultSet = statement.executeQuery(sql);
             Ranking ranking = null;

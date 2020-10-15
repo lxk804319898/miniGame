@@ -6,6 +6,7 @@ import countDown.CountDown;
 import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
+import totalGameRank.RankTabs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class GameMenu extends JFrame{
     private JButton countDown;
     private JButton mineSweeperGame;
     private JButton rememberCardBtn;
+    private JButton totalRankBtn;
 
     public static void main(String[] args) {
         GameMenu gameMenu = new GameMenu();
@@ -35,16 +37,18 @@ public class GameMenu extends JFrame{
         countDown = new JButton("倒计时");
         mineSweeperGame = new JButton("扫雷");
         rememberCardBtn = new JButton("翻牌记忆");
+        totalRankBtn = new JButton("各游戏排行");
 
         //添加JPanel
-         jpanel.add(guessNumber);
-         jpanel.add(snake);
-         jpanel.add(friend);
-         jpanel.add(jb4);
-         jpanel.add(jb5);
-         jpanel.add(countDown);
-         jpanel.add(mineSweeperGame);
-         jpanel.add(rememberCardBtn);
+        jpanel.add(guessNumber);
+        jpanel.add(snake);
+        jpanel.add(friend);
+        jpanel.add(jb4);
+        jpanel.add(jb5);
+        jpanel.add(countDown);
+        jpanel.add(mineSweeperGame);
+        jpanel.add(rememberCardBtn);
+        jpanel.add(totalRankBtn);
 
         //添加组件到边界布局BorderLayout
         this.add(jpanel,BorderLayout.CENTER);
@@ -64,6 +68,7 @@ public class GameMenu extends JFrame{
         addActionListener(countDown);
         addActionListener(mineSweeperGame);
         addActionListener(rememberCardBtn);
+        addActionListener(totalRankBtn);
         //显示
         this.setVisible(true);
     }
@@ -87,6 +92,9 @@ public class GameMenu extends JFrame{
             } else if (e.getSource() == countDown){
                 CountDown countDown = new CountDown();
                 countDown.initTime();
+            } else if (e.getSource() == totalRankBtn){
+                RankTabs rankTabs = new RankTabs();
+                rankTabs.initRankTabs();
             } else{
                 JOptionPane.showMessageDialog(null, "尚未开发，敬请期待！");
             }
