@@ -59,6 +59,11 @@ public class RankTabs extends JFrame {
         return tabbedPane;
     }
 
+    /**
+     * 添加备注
+     * @param jPanel
+     * @param rankingList
+     */
     private void buildRankContent(JPanel jPanel , List<Ranking> rankingList){
         // 添加写入内容
         JLabel jLabel = new JLabel();
