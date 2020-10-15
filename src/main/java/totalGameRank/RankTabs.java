@@ -80,6 +80,7 @@ public class RankTabs extends JFrame {
             showText.append("<br> --暂无排行-- <br>");
             System.out.println("Hello World");
             System.out.println("Hello 个 der");
+            System.out.println("Hello");
         }
         showText.append("</html>");
         jLabel.setText(showText.toString());
