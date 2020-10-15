@@ -54,6 +54,8 @@ public class Board extends JPanel implements ActionListener {
     private Image mushroom;
     private Image award;
 
+    private static boolean gameState;
+
     Board() {
         initBoard();
     }
@@ -104,6 +106,7 @@ public class Board extends JPanel implements ActionListener {
 
         timer = new Timer(DELAY, this);
         timer.start();
+        gameState = true;
     }
 
     @Override
@@ -154,9 +157,10 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
         
         String msg = "Game Over 总得分:"+score;
-        if (User.name != null){
+        if (User.name != null && gameState == true){
             Jdbc jdbc  = new Jdbc();
             jdbc.insertScore("Snake",score);
+            gameState = false;
         }
 
         Font small = new Font("Helvetica", Font.BOLD, 14);
