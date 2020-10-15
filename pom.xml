@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>miniGame</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>fish-1.0.0</version>
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
