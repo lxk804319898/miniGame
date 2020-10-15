@@ -87,6 +87,8 @@ public class GameMenu extends JFrame{
             } else if (e.getSource() == countDown){
                 CountDown countDown = new CountDown();
                 countDown.initTime();
+            } else{
+                JOptionPane.showMessageDialog(null, "尚未开发，敬请期待！");
             }
         });
     }
