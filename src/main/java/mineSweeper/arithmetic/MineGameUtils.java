@@ -261,13 +261,16 @@ public class MineGameUtils {
 		if (this.callBack != null) {
 			this.callBack.onRightClick(mineBean, i, j);
 		}
-		checkWin();
+		//checkWin();
 	}
 
 	private void checkWin() {
-		if (flagMines != unOpenMines) {
+		if(mMineCount != unOpenMines) {
 			return;
 		}
+//		if (flagMines != unOpenMines) {
+//			return;
+//		}
 		isGameOver = true;
 		if (this.callBack != null) {
 			this.callBack.onWin(System.currentTimeMillis() - gameStartTime);
