@@ -1,9 +1,18 @@
 package commonUtils;
 
 public class Ranking {
+    private Long id;
     private String gameName; //游戏名
     private String name;     //水B名
     private Integer scores;  //分数
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getGameName() {
         return gameName;

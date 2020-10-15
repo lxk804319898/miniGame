@@ -45,9 +45,10 @@ public class Jdbc {
             Ranking ranking = null;
             while (resultSet.next()) {
                 ranking = new Ranking();
-                ranking.setGameName(resultSet.getString(1));
-                ranking.setName(resultSet.getString(3));
-                ranking.setScores(resultSet.getInt(2));
+                ranking.setId(resultSet.getLong(1));
+                ranking.setGameName(resultSet.getString(2));
+                ranking.setName(resultSet.getString(4));
+                ranking.setScores(resultSet.getInt(3));
                 list.add(ranking);
             }
             resultSet.close();
@@ -68,9 +69,10 @@ public class Jdbc {
             Ranking ranking = null;
             while (resultSet.next()) {
                 ranking = new Ranking();
-                ranking.setGameName(resultSet.getString(1));
-                ranking.setName(resultSet.getString(3));
-                ranking.setScores(resultSet.getInt(2));
+                ranking.setId(resultSet.getLong(1));
+                ranking.setGameName(resultSet.getString(2));
+                ranking.setName(resultSet.getString(4));
+                ranking.setScores(resultSet.getInt(3));
                 list.add(ranking);
             }
             resultSet.close();
@@ -94,7 +96,8 @@ public class Jdbc {
             resultSet = statement.executeQuery(sql1);
             if (resultSet.next()) {
                 long ID = resultSet.getLong(1);
-                String sql = "insert into ranking(game, scores, user_name) values(\"" + game + "\",\"" + scores + "\",\"" + User.name + "\")";
+                SnowFlake snowFlake = new SnowFlake(2,3);
+                String sql = "insert into ranking(id,game, scores, user_name) values(\"" + snowFlake.nextId() + "\",\"" + game + "\",\"" + scores + "\",\"" + User.name + "\")";
                 int a = statement.executeUpdate(sql);
             } else {
                 JOptionPane.showMessageDialog(null, "用户不存在！");
