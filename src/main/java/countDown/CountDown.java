@@ -2,6 +2,8 @@ package countDown;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -73,16 +75,18 @@ public class CountDown {
 
     /**
      * 停止定时器
+     *
+     * @param isFinished 表示是否正常倒计时结束
      */
     private void stopTimer(boolean isFinished) {
         if(isFinished) {
             ImageIcon icon = new ImageIcon("src/resources/CountDownResources/paolu.png");
             icon.setImage(icon.getImage().getScaledInstance(180, 150, Image.SCALE_DEFAULT));
             jl0.setIcon(icon);
-            if (scheduled != null) {
-                scheduled.shutdownNow();
-                scheduled = null;
-            }
+        }
+        if (scheduled != null) {
+            scheduled.shutdownNow();
+            scheduled = null;
         }
     }
     
@@ -104,6 +108,13 @@ public class CountDown {
         jFrame.setLocation(300, 400);
         jFrame.setSize(330, 200);
         jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        jFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                stopTimer(false);
+                super.windowClosed(e);
+            }
+        });
     }
 
 }
