@@ -78,6 +78,7 @@ public class RankTabs extends JFrame {
             }
         }else{
             showText.append("<br> --暂无排行-- <br>");
+            System.out.println("Hello World");
             System.out.println("Hello 个 der");
         }
         showText.append("</html>");
