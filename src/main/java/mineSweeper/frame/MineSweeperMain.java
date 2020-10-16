@@ -1,6 +1,9 @@
 package mineSweeper.frame;
 
+import commonUtils.Jdbc;
+import commonUtils.consts.GameNameConsts;
 import mineSweeper.arithmetic.MineGameUtils;
+import mineSweeper.arithmetic.RankScoreUtils;
 import mineSweeper.bean.MineBean;
 import mineSweeper.bean.MineImage;
 import mineSweeper.bean.MineLevel;
@@ -222,6 +225,13 @@ public class MineSweeperMain extends JFrame {
 		button.setIcon(icon);
 	}
 
+	private void uploadScore(long time){
+		if(!mineLevel.equals(MineLevel.EASY) && !mineLevel.equals(MineLevel.NORMAL) && !mineLevel.equals(MineLevel.HARD)) {
+			return;
+		}
+		RankScoreUtils.uploadScore(time,mineLevel);
+	}
+
 	private MineGameUtils.CallBack callback = new MineGameUtils.CallBack() {
 			@Override
 			public void onWin(long time) {
@@ -229,6 +239,7 @@ public class MineSweeperMain extends JFrame {
 					setButtonImage(resetBtn, MineType.MINE_STATUS_WIN);
 				}
 				JOptionPane.showMessageDialog(MineSweeperMain.this, "胜利! 用时: " + time / 1000 + " 秒");
+				uploadScore(time/1000);
 			}
 
 			@Override
