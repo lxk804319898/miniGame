@@ -2,6 +2,7 @@ package gameCenter;
 
 import chatRoom.ChatRooms;
 import RememberCard.StartRCCardGame;
+import commonUtils.consts.MenuParaConsts;
 import countDown.CountDown;
 import guessNumber.Sucess;
 import mineSweeper.frame.MineSweeperMain;
@@ -13,58 +14,58 @@ import java.awt.*;
 
 public class GameMenu extends JFrame{
 
-    private JButton guessNumber;
-    private JButton snake;
-    private JButton friend;
-    private JButton countDown;
-    private JButton mineSweeperGame;
-    private JButton rememberCardBtn;
-    private JButton totalRankBtn;
+    private JButton guessNumber = new JButton("猜数字");
+    private JButton snake = new JButton("贪吃蛇");
+    private JButton friend = new JButton("同城交友");
+    private JButton countDown = new JButton("倒计时");
+    private JButton mineSweeperGame = new JButton("扫雷");
+    private JButton rememberCardBtn = new JButton("翻牌记忆");
+    private JButton totalRankBtn = new JButton("各游戏排行");
+    private JButton jigsaw = new JButton("拼图");
+    private JButton moveBox = new JButton("推箱子");
 
     public static void main(String[] args) {
-        GameMenu gameMenu = new GameMenu();
+        new GameMenu();
     }
 
     public GameMenu(){
         //创建组件
-        JPanel jpanel = new JPanel();
+        JPanel mainMenu = new JPanel();
 
-        guessNumber = new JButton("猜数字");
-        snake = new JButton("贪吃蛇");
-        friend = new JButton("同城交友");
-        JButton jb4 = new JButton("拼图");
-        JButton jb5 = new JButton("推箱子");
-        countDown = new JButton("倒计时");
-        mineSweeperGame = new JButton("扫雷");
-        rememberCardBtn = new JButton("翻牌记忆");
-        totalRankBtn = new JButton("各游戏排行");
+        JLabel menuName = new JLabel("摸鱼项目",JLabel.CENTER);
+        menuName.setFont(new Font("微软雅黑", Font.BOLD, 30));
+
+        JLabel copyRight = new JLabel("Copyright © 2020-2020 闽侯渔业中心摸鱼项目组 版权所有",JLabel.CENTER);
+
+
 
         //添加JPanel
-        jpanel.add(guessNumber);
-        jpanel.add(snake);
-        jpanel.add(friend);
-        jpanel.add(jb4);
-        jpanel.add(jb5);
-        jpanel.add(countDown);
-        jpanel.add(mineSweeperGame);
-        jpanel.add(rememberCardBtn);
-        jpanel.add(totalRankBtn);
+        mainMenu.add(guessNumber);
+        mainMenu.add(snake);
+        mainMenu.add(friend);
+        mainMenu.add(jigsaw);
+        mainMenu.add(moveBox);
+        mainMenu.add(countDown);
+        mainMenu.add(mineSweeperGame);
+        mainMenu.add(rememberCardBtn);
+        mainMenu.add(totalRankBtn);
 
-        //添加组件到边界布局BorderLayout
-        this.add(jpanel,BorderLayout.CENTER);
+        //布局设置
+        getContentPane().add("North",menuName);
+        getContentPane().add("Center",mainMenu);
+        getContentPane().add("South",copyRight);
 
         //窗体设置
         this.setTitle("闽侯渔业中心");
-        this.setSize(300,200);
         this.setResizable(false);
-        this.setLocation(200,200);
+        this.setBounds((MenuParaConsts.SCREEN_WIDTH - MenuParaConsts.UI_WIDTH) / 2,(MenuParaConsts.SCREEN_HEIGHT - MenuParaConsts.UI_HEIGHT) / 2, MenuParaConsts.UI_WIDTH, MenuParaConsts.UI_HEIGHT);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         addActionListener(guessNumber);
         addActionListener(snake);
         addActionListener(friend);
-        addActionListener(jb4);
-        addActionListener(jb5);
+        addActionListener(jigsaw);
+        addActionListener(moveBox);
         addActionListener(countDown);
         addActionListener(mineSweeperGame);
         addActionListener(rememberCardBtn);

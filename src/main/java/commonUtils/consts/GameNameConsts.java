@@ -1,6 +1,6 @@
 package commonUtils.consts;
 
-public interface GameNameConsts {
+public class GameNameConsts {
     public static final String SNAKE = "贪吃蛇";
 
     public static final String MINESWEEPER_EASY = "扫雷初级";
