@@ -1,7 +1,5 @@
 package mineSweeper.frame;
 
-import commonUtils.Jdbc;
-import commonUtils.consts.GameNameConsts;
 import mineSweeper.arithmetic.MineGameUtils;
 import mineSweeper.arithmetic.RankScoreUtils;
 import mineSweeper.bean.MineBean;
@@ -10,12 +8,8 @@ import mineSweeper.bean.MineLevel;
 import mineSweeper.bean.MineType;
 import mineSweeper.listener.MyMouseListener;
 import mineSweeper.tools.SizeTools;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-
 import javax.swing.*;
 
 
@@ -92,33 +86,29 @@ public class MineSweeperMain extends JFrame {
 	public JMenuBar initMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("选项");
-		JMenuItem level1Btn = new JMenuItem("初级");
-		level1Btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setMineLevel(MineLevel.EASY);
-				init();
-			}
+		JMenuItem easyLevel = new JMenuItem("初级");
+		easyLevel.addActionListener(e -> {
+			setMineLevel(MineLevel.EASY);
+			init();
 		});
-		JMenuItem level2Btn = new JMenuItem("中级");
-		level2Btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setMineLevel(MineLevel.NORMAL);
-				init();
-			}
+		JMenuItem middleLevel = new JMenuItem("中级");
+		middleLevel.addActionListener(e -> {
+			setMineLevel(MineLevel.NORMAL);
+			init();
 		});
-		JMenuItem level3Btn = new JMenuItem("高级");
-		level3Btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setMineLevel(MineLevel.HARD);
-				init();
-			}
+		JMenuItem hardLevel = new JMenuItem("高级");
+		hardLevel.addActionListener(e -> {
+			setMineLevel(MineLevel.HARD);
+			init();
 		});
-		menu.add(level1Btn);
-		menu.add(level2Btn);
-		menu.add(level3Btn);
+		JMenuItem customLevel = new JMenuItem("自定义");
+		customLevel.addActionListener(e -> {
+			new DifficultyOptions();
+		});
+		menu.add(easyLevel);
+		menu.add(middleLevel);
+		menu.add(hardLevel);
+		menu.add(customLevel);
 		menuBar.add(menu);
 		return menuBar;
 	}
