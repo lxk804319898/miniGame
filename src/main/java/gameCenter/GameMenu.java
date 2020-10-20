@@ -2,6 +2,7 @@ package gameCenter;
 
 import chatRoom.ChatRooms;
 import RememberCard.StartRCCardGame;
+import commonUtils.Base.BaseBtn;
 import commonUtils.consts.MenuParaConsts;
 import countDown.CountDown;
 import guessNumber.Sucess;
@@ -14,15 +15,17 @@ import java.awt.*;
 
 public class GameMenu extends JFrame{
 
-    private JButton guessNumber = new JButton("猜数字");
-    private JButton snake = new JButton("贪吃蛇");
-    private JButton friend = new JButton("同城交友");
-    private JButton countDown = new JButton("倒计时");
-    private JButton mineSweeperGame = new JButton("扫雷");
-    private JButton rememberCardBtn = new JButton("翻牌记忆");
-    private JButton totalRankBtn = new JButton("各游戏排行");
-    private JButton jigsaw = new JButton("拼图");
-    private JButton moveBox = new JButton("推箱子");
+    GridBagConstraints gridBagConstraints=new GridBagConstraints();//实例化这个对象用来对组件进行管理
+
+    private JButton guessNumber = new BaseBtn("猜数字");
+    private JButton snake = new BaseBtn("贪吃蛇");
+    private JButton friend = new BaseBtn("同城交友");
+    private JButton countDown = new BaseBtn("倒计时");
+    private JButton mineSweeperGame = new BaseBtn("扫雷");
+    private JButton rememberCardBtn = new BaseBtn("翻牌记忆");
+    private JButton totalRankBtn = new BaseBtn("各游戏排行");
+    private JButton jigsaw = new BaseBtn("拼图");
+    private JButton moveBox = new BaseBtn("推箱子");
 
     public static void main(String[] args) {
         new GameMenu();
@@ -37,8 +40,6 @@ public class GameMenu extends JFrame{
 
         JLabel copyRight = new JLabel("Copyright © 2020-2020 闽侯渔业中心摸鱼项目组 版权所有",JLabel.CENTER);
 
-
-
         //添加JPanel
         mainMenu.add(guessNumber);
         mainMenu.add(snake);
@@ -50,7 +51,7 @@ public class GameMenu extends JFrame{
         mainMenu.add(rememberCardBtn);
         mainMenu.add(totalRankBtn);
 
-        //布局设置
+        //界面frame布局设置
         getContentPane().add("North",menuName);
         getContentPane().add("Center",mainMenu);
         getContentPane().add("South",copyRight);
