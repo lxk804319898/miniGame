@@ -12,7 +12,11 @@ public enum MineLevel {
     /**
      * 高级难度
      */
-    HARD("3","16_30_99");
+    HARD("3","16_30_99"),
+    /**
+     * 自定义难度
+     */
+    CUSTOMIZE("4","16_30_99");
 
     /**
      * 难度代码
@@ -34,5 +38,11 @@ public enum MineLevel {
 
     public String getMineInfo() {
         return mineInfo;
+    }
+
+    public void setMineInfo(String mineInfo) {
+        if("4".equals(levelCode)) {
+            this.mineInfo = mineInfo;
+        }
     }
 }

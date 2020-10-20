@@ -103,7 +103,7 @@ public class MineSweeperMain extends JFrame {
 		});
 		JMenuItem customLevel = new JMenuItem("自定义");
 		customLevel.addActionListener(e -> {
-			new DifficultyOptions();
+			new DifficultyOptions(diffOpCallBack);
 		});
 		menu.add(easyLevel);
 		menu.add(middleLevel);
@@ -261,6 +261,14 @@ public class MineSweeperMain extends JFrame {
 				setButtonImage(buttonArr[i][j], mineBean.getImageStatus());
 			}
 		};
+
+	private DifficultyOptions.CallBack diffOpCallBack = new DifficultyOptions.CallBack() {
+		@Override
+		public void confirmCreate(MineLevel mineLevel) {
+			setMineLevel(mineLevel);
+			init();
+		}
+	};
 
 	public MineLevel getMineLevel() {
 		return mineLevel;

@@ -1,7 +1,7 @@
 package mineSweeper.frame;
 
-import commonUtils.Base.BaseBtn;
 import commonUtils.consts.MenuParaConsts;
+import mineSweeper.bean.MineLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +10,14 @@ public class DifficultyOptions extends JFrame {
     private int UIWidth = 200;
     private int UIHeight = 200;
 
+    private CallBack callBack;
+
     private JTextField widthText = new JTextField(3);
     private JTextField heightText = new JTextField(3);
     private JTextField numText = new JTextField(3);
 
-    public DifficultyOptions() throws HeadlessException {
+    public DifficultyOptions(CallBack callback) throws HeadlessException {
+        this.callBack = callback;
         init();
     }
 
@@ -82,6 +85,8 @@ public class DifficultyOptions extends JFrame {
         confirmBtn.addActionListener(e -> {
             if(paramVaild()){
                 String mineInfo =widthText.getText()+"_"+heightText.getText()+"_"+numText.getText();
+                MineLevel.CUSTOMIZE.setMineInfo(mineInfo);
+                callBack.confirmCreate(MineLevel.CUSTOMIZE);
                 dispose();
             }
         });
@@ -96,6 +101,7 @@ public class DifficultyOptions extends JFrame {
         getContentPane().add("South",btnPanel);
         this.setVisible(true);
     }
+
 
     private boolean paramVaild(){
         String width = widthText.getText();
@@ -118,5 +124,18 @@ public class DifficultyOptions extends JFrame {
             return false;
         }
         return true;
+    }
+
+
+    public interface CallBack {
+        void confirmCreate(MineLevel mineLevel);
+    }
+
+    public CallBack getCallBack() {
+        return callBack;
+    }
+
+    public void setCallBack(CallBack callback) {
+        this.callBack = callback;
     }
 }
