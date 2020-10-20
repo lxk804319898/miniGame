@@ -2,7 +2,6 @@ package snake;
 
 import commonUtils.Jdbc;
 import commonUtils.Ranking;
-import guessNumber.ButListener;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

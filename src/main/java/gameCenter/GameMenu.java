@@ -5,7 +5,7 @@ import RememberCard.StartRCCardGame;
 import commonUtils.Base.BaseBtn;
 import commonUtils.consts.MenuParaConsts;
 import countDown.CountDown;
-import guessNumber.Sucess;
+import guessNumber.GuessNumberUI;
 import mineSweeper.frame.MineSweeperMain;
 import snake.Snake;
 import totalGameRank.RankTabs;
@@ -80,7 +80,7 @@ public class GameMenu extends JFrame{
         saveButton.addActionListener(e -> {
             if (e.getSource() == guessNumber){
                 //默认为5
-                Sucess sc = new Sucess();
+                GuessNumberUI sc = new GuessNumberUI();
                 sc.showUI(5);
             }else if (e.getSource() == snake){
                 Snake sn = new Snake();
