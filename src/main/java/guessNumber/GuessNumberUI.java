@@ -13,14 +13,23 @@ public class GuessNumberUI {
         JFrame guessFrame = new JFrame();
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("选项");
-        JMenuItem jMenuItem = new JMenuItem("选择位数");
-        menu.add(jMenuItem);
-        menuBar.add(menu);
-        jMenuItem.addActionListener(e -> {
+        JMenu gameOptions = new JMenu("选项");
+
+        JMenuItem chooseLength = new JMenuItem("选择位数");
+        gameOptions.addActionListener(e -> {
             guessFrame.dispose();
             chooseLength();
         });
+        gameOptions.add(chooseLength);
+
+        JMenuItem rules = new JMenuItem("游戏规则");
+        rules.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "有一个没有重复数字的n位数。每猜一次，根据这个数字给出几A几B，其中A前面的数字表示位置正确的数的个数，而B前的数字表示数字正确而位置不对的数的个数。");
+        });
+        gameOptions.add(rules);
+
+        menuBar.add(gameOptions);
+        guessFrame.setJMenuBar(menuBar);
 
         guessFrame.setTitle("正在猜" + times + "位数字");
         guessFrame.setSize(300, 400);
@@ -47,7 +56,6 @@ public class GuessNumberUI {
         confirm.addActionListener(but);
         but.setJtf(answer, guessNumber, guessFrame);
 
-        guessFrame.setJMenuBar(menuBar);
         guessFrame.setVisible(true);
     }
 
