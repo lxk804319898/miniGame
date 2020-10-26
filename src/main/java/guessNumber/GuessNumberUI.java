@@ -16,7 +16,7 @@ public class GuessNumberUI {
         JMenu gameOptions = new JMenu("选项");
 
         JMenuItem chooseLength = new JMenuItem("选择位数");
-        gameOptions.addActionListener(e -> {
+        chooseLength.addActionListener(e -> {
             guessFrame.dispose();
             chooseLength();
         });
@@ -48,14 +48,20 @@ public class GuessNumberUI {
         guessFrame.setLayout(flow);
 
         JButton confirm = new BaseBtn("确定");
+        confirm.addActionListener(e -> {
+            String guess = answer.getText();
+            answer.setText("");
+            String result = guessNumber.guess(guess);
+            JLabel jLabel = new JLabel();
+            Dimension resultDm=new Dimension(280,20);
+            jLabel.setPreferredSize(resultDm);
+            guessFrame.add(jLabel);
+            jLabel.setText(result+"   "+guess);
+            if(result.charAt(4)-48==times){
+                JOptionPane.showMessageDialog(null, "游戏胜利！");
+            }
+        });
         guessFrame.add(confirm);
-
-        //给按钮添加动作监听器方法
-        GuessListener but = new GuessListener();
-        //创建一个监听器
-        confirm.addActionListener(but);
-        but.setJtf(answer, guessNumber, guessFrame);
-
         guessFrame.setVisible(true);
     }
 
