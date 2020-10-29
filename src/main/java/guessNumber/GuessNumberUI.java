@@ -4,6 +4,8 @@ import commonUtils.Base.BaseBtn;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GuessNumberUI {
 
@@ -24,7 +26,8 @@ public class GuessNumberUI {
 
         JMenuItem rules = new JMenuItem("游戏规则");
         rules.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "有一个没有重复数字的n位数。每猜一次，根据这个数字给出几A几B，其中A前面的数字表示位置正确的数的个数，而B前的数字表示数字正确而位置不对的数的个数。");
+            JOptionPane.showMessageDialog(null, "有一个没有重复数字的n位数。每猜一次，根据这个数字给出几A几B。" +
+                    "其中A前面的数字表示位置正确的数的个数，而B前的数字表示数字正确而位置不对的数的个数。当结果是n 0时表示猜对该数字");
         });
         gameOptions.add(rules);
 
@@ -42,6 +45,24 @@ public class GuessNumberUI {
         JTextField answer = new JTextField();
         Dimension dm1 = new Dimension(280, 30);
         answer.setPreferredSize(dm1);
+        answer.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ENTER)   //按回车键执行相应操作;
+                {
+                    String guess = answer.getText();
+                    answer.setText("");
+                    String result = guessNumber.guess(guess);
+                    JLabel jLabel = new JLabel();
+                    Dimension resultDm = new Dimension(280, 20);
+                    jLabel.setPreferredSize(resultDm);
+                    guessFrame.add(jLabel);
+                    jLabel.setText(result + "   " + guess);
+                    if (result.charAt(4) - 48 == times) {
+                        JOptionPane.showMessageDialog(null, "游戏胜利！");
+                    }
+                }
+            }
+        });
         guessFrame.add(answer);
 
         FlowLayout flow = new FlowLayout();
@@ -53,11 +74,11 @@ public class GuessNumberUI {
             answer.setText("");
             String result = guessNumber.guess(guess);
             JLabel jLabel = new JLabel();
-            Dimension resultDm=new Dimension(280,20);
+            Dimension resultDm = new Dimension(280, 20);
             jLabel.setPreferredSize(resultDm);
             guessFrame.add(jLabel);
-            jLabel.setText(result+"   "+guess);
-            if(result.charAt(4)-48==times){
+            jLabel.setText(result + "   " + guess);
+            if (result.charAt(4) - 48 == times) {
                 JOptionPane.showMessageDialog(null, "游戏胜利！");
             }
         });
@@ -78,6 +99,16 @@ public class GuessNumberUI {
         JTextField jtf = new JTextField();
         Dimension dm1 = new Dimension(280, 30);
         jtf.setPreferredSize(dm1);
+        jtf.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ENTER)   //按回车键执行相应操作;
+                {
+                    GuessNumberUI sc = new GuessNumberUI();
+                    chooseFrame.dispose();
+                    sc.showUI(jtf.getText().toCharArray()[0] - 48);
+                }
+            }
+        });
         chooseFrame.add(jtf);
 
         FlowLayout flow = new FlowLayout();
