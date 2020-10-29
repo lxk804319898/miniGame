@@ -20,9 +20,9 @@ public class Jdbc {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
-            String url = "jdbc:mysql://cd-cdb-7r54s7ws.sql.tencentcdb.com:62303/fishing?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+            String url = "jdbc:mysql://172.18.150.253:3306/fishing?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
             String name = "root";
-            String password = "wkq350424";
+            String password = "123456";
             connection = DriverManager.getConnection(url, name, password);
             statement = connection.createStatement();
         }catch (ClassNotFoundException | SQLException e){
