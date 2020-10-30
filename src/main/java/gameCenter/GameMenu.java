@@ -9,6 +9,7 @@ import game2048.JF2048;
 import game2048.Ja2048;
 import guessNumber.GuessNumberUI;
 import mineSweeper.frame.MineSweeperMain;
+import pushBox.main.PushBoxMainFrame;
 import snake.Snake;
 import totalGameRank.RankTabs;
 
@@ -17,17 +18,19 @@ import java.awt.*;
 
 public class GameMenu extends JFrame {
 
-    GridBagConstraints gridBagConstraints = new GridBagConstraints();//实例化这个对象用来对组件进行管理
-
     private JButton guessNumber = new BaseBtn("猜数字");
     private JButton snake = new BaseBtn("贪吃蛇");
     private JButton friend = new BaseBtn("同城交友");
+
+    private JButton game2048 = new BaseBtn("2048");
+    private JButton moveBox = new BaseBtn("推箱子");
     private JButton countDown = new BaseBtn("倒计时");
+
     private JButton mineSweeperGame = new BaseBtn("扫雷");
     private JButton rememberCardBtn = new BaseBtn("翻牌记忆");
     private JButton totalRankBtn = new BaseBtn("各游戏排行");
-    private JButton game2048 = new BaseBtn("2048");
-    private JButton moveBox = new BaseBtn("推箱子");
+
+
 
     public static void main(String[] args) {
         new GameMenu();
@@ -46,9 +49,11 @@ public class GameMenu extends JFrame {
         mainMenu.add(guessNumber);
         mainMenu.add(snake);
         mainMenu.add(friend);
+
         mainMenu.add(game2048);
         mainMenu.add(moveBox);
         mainMenu.add(countDown);
+
         mainMenu.add(mineSweeperGame);
         mainMenu.add(rememberCardBtn);
         mainMenu.add(totalRankBtn);
@@ -102,6 +107,8 @@ public class GameMenu extends JFrame {
             } else if (e.getSource() == game2048) {
                 JF2048 jf = new JF2048();
                 jf.setJa(new Ja2048(jf));
+            } else if (e.getSource() == moveBox) {
+                new PushBoxMainFrame();
             } else {
                 JOptionPane.showMessageDialog(null, "尚未开发，敬请期待！");
             }
