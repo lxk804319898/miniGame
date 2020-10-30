@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import commonUtils.User;
 import gameCenter.GameMenu;
-import snake.Snake;
 
 import javax.swing.*;
 
@@ -66,7 +65,9 @@ public class Login extends JFrame implements ActionListener {
         }
     }
 
-    //登录按钮的事件处理函数
+    /**
+     *   登录按钮的事件处理函数
+     */
     private void login() {
         Jdbc d = new Jdbc();
         String username = nameText.getText();
@@ -74,8 +75,6 @@ public class Login extends JFrame implements ActionListener {
         if (d.compare(username, password)) {
             User.name = username;
             super.setVisible(false);
-//            Snake sn = new Snake();
-//            sn.showUI();
             GameMenu gameMenu = new GameMenu();
         }
     }
