@@ -1,5 +1,7 @@
 package countDown;
 
+import commonUtils.ApiUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -11,6 +13,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 倒计时
@@ -21,6 +24,10 @@ public class CountDown {
     private JLabel jl0;
 
     private ScheduledThreadPoolExecutor scheduled;
+    /**
+     * 诗词
+     */
+    private static String verse = "c4c2abc1-e5b7-11ea-9d4b-00163e1e93a5";
 
     public void initTime(){
         LocalDate today = LocalDate.now();
@@ -36,7 +43,9 @@ public class CountDown {
     }
 
     private void timer(LocalDateTime offWorkTime, LocalDateTime midBreakStartTime, LocalDateTime midBreakEndTime) {
+        ApiUtils apiUtils = new ApiUtils();
         String midEndWarn = "午休时间已过！";
+        AtomicReference<String> timerVerse = new AtomicReference<>(apiUtils.getQuotation(verse));
         scheduled.scheduleAtFixedRate(() -> {
             LocalDateTime now = LocalDateTime.now();
             StringBuilder showText = new StringBuilder("<html><br>");
@@ -54,8 +63,14 @@ public class CountDown {
             } else if (now.isBefore(offWorkTime)) {
                 showText.append(midEndWarn).append("<br><br>");
                 Duration remaining = Duration.ofSeconds(now.until(offWorkTime, ChronoUnit.SECONDS));
+                long remainingTime = remaining.getSeconds();
+                if ((remainingTime % 3600) % 60 % 10 == 0){
+                    timerVerse.set(apiUtils.getQuotation(verse));
+                }
                 showText.append("距离下班（").append(offWorkTime).append("）还有<br>")
                     .append(formatRemaining(remaining))
+                    .append("<br><br>")
+                    .append(timerVerse.get())
                     .append("<br><br>");
             } else {
                 stopTimer(true);
@@ -89,7 +104,7 @@ public class CountDown {
             scheduled = null;
         }
     }
-    
+
     public CountDown() {
         scheduled = new ScheduledThreadPoolExecutor(1);
         init();
