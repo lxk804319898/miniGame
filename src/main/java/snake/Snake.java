@@ -37,7 +37,6 @@ public class Snake extends JFrame {
         jMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                jf.dispose();
                 showRanking();
             }
         });

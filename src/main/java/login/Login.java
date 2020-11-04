@@ -79,7 +79,9 @@ public class Login extends JFrame implements ActionListener {
         }
     }
 
-    //注册按钮触发后的事件处理函数
+    /**
+     * 注册按钮触发后的事件处理函数
+     */
     private void register() {
         Jdbc d = new Jdbc();
         String username = nameText.getText();
