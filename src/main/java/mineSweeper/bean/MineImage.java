@@ -14,24 +14,24 @@ public class MineImage {
 
 	static {
 		IMAGE_PATHS = new String[] {
-			"src/main/java/mineSweeper/images/m0.png",
-			"src/main/java/mineSweeper/images/m1.png",
-			"src/main/java/mineSweeper/images/m2.png",
-			"src/main/java/mineSweeper/images/m3.png",
-			"src/main/java/mineSweeper/images/m4.png",
-			"src/main/java/mineSweeper/images/m5.png",
-			"src/main/java/mineSweeper/images/m6.png",
-			"src/main/java/mineSweeper/images/m7.png",
-			"src/main/java/mineSweeper/images/m8.png",
-			"src/main/java/mineSweeper/images/m9.png",
-			"src/main/java/mineSweeper/images/blank.png",
-			"src/main/java/mineSweeper/images/flag.png",
-			"src/main/java/mineSweeper/images/unknow.png",
-			"src/main/java/mineSweeper/images/mine_click.png",
-			"src/main/java/mineSweeper/images/facedead.png",
-			"src/main/java/mineSweeper/images/facesmile.png",
-			"src/main/java/mineSweeper/images/facewin.png",
-			"src/main/java/mineSweeper/images/logo.png"
+			"src/main/resources/mineSweeper/m0.png",
+			"src/main/resources/mineSweeper/m1.png",
+			"src/main/resources/mineSweeper/m2.png",
+			"src/main/resources/mineSweeper/m3.png",
+			"src/main/resources/mineSweeper/m4.png",
+			"src/main/resources/mineSweeper/m5.png",
+			"src/main/resources/mineSweeper/m6.png",
+			"src/main/resources/mineSweeper/m7.png",
+			"src/main/resources/mineSweeper/m8.png",
+			"src/main/resources/mineSweeper/m9.png",
+			"src/main/resources/mineSweeper/blank.png",
+			"src/main/resources/mineSweeper/flag.png",
+			"src/main/resources/mineSweeper/unknow.png",
+			"src/main/resources/mineSweeper/mine_click.png",
+			"src/main/resources/mineSweeper/facedead.png",
+			"src/main/resources/mineSweeper/facesmile.png",
+			"src/main/resources/mineSweeper/facewin.png",
+			"src/main/resources/mineSweeper/logo.png"
 		};
 	}
 

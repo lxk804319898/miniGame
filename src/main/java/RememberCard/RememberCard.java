@@ -41,10 +41,11 @@ public class RememberCard extends JFrame {
     /**
      * 存放图片的目录，简单起见，存放图片的目录中图片个数为初始化的行列数乘积的一半
      */
-    private String picDir = "src/resources/RCResources/";
+    private String picDir = "src/main/resources/RCResources/";
     private String[] picture;
     protected boolean isStart;
     private PicPanel preOne = null;
+    private int clickTimes = 0;
     /**
      * 用于标示已找到的对数
      */
@@ -310,6 +311,7 @@ class PicPanel extends JPanel {
     private boolean isShow = false;
     private RememberCard parent;
     private boolean finished = false;
+    private int count = 0;
 
     public PicPanel(RememberCard rememberCard, String picPath) {
         this.picPath = picPath;
@@ -341,13 +343,20 @@ class PicPanel extends JPanel {
                     if (!parent.isRunning() || finished) {
                         return;
                     }
+                    count++;
+                    if (count >= 2) {
+                        return;
+                    }
+                    PicPanel curOne = (PicPanel) lbl_Pic.getParent();
+                    PicPanel preOne = parent.getPreOne();
+                    if (curOne.equals(preOne)) {
+                        return;
+                    }
                     isShow = !isShow;
                     if (isShow) {
                         if (bgIcon == null) {
                             initLabelImage();
                         }
-                        PicPanel curOne = (PicPanel) lbl_Pic.getParent();
-                        PicPanel preOne = parent.getPreOne();
                         if (preOne == null) {
                             parent.setPreOne(curOne);
                         } else {
@@ -373,6 +382,7 @@ class PicPanel extends JPanel {
                                 parent.setPreOne(null);
                                 return;
                             }
+                            count = 0;
                         }
                         lbl_Pic.setIcon(bgIcon);
                     } else {
