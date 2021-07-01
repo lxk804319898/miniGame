@@ -27,6 +27,7 @@ public class MineSweeperMain extends JFrame {
 	public final int mGridSideLength = 25;// 格子的边长
 
 	private JButton[][] buttonArr;
+	private JTextField nowMineCountText;
 	private JButton resetBtn;
 
 	private boolean isClickComplete = true;
@@ -116,6 +117,9 @@ public class MineSweeperMain extends JFrame {
 	public JPanel topLayout() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
+		nowMineCountText = new JTextField(""+mMineCount);
+		nowMineCountText.setEditable(false);
+		panel.add(nowMineCountText);
 		resetBtn = new JButton();
 		resetBtn.setBorderPainted(false); // 消除边框
 		resetBtn.setContentAreaFilled(false); // 消除内容域，即中间的那一块
@@ -234,6 +238,9 @@ public class MineSweeperMain extends JFrame {
 
 			@Override
 			public void onInit(boolean isReset) {
+				if(isReset) {
+					nowMineCountText.setText("" + mMineCount);
+				}
 				initButtons(isReset);
 			}
 
@@ -254,10 +261,12 @@ public class MineSweeperMain extends JFrame {
 			}
 
 			@Override
-			public void onRightClick(MineBean mineBean, int i, int j) {
+			public void onRightClick(MineBean mineBean, int i, int j,int flagMines) {
 				if (buttonArr == null || mineBean == null) {
 					return;
 				}
+				int nowMineCount = mMineCount - flagMines;
+				nowMineCountText.setText(""+nowMineCount);
 				setButtonImage(buttonArr[i][j], mineBean.getImageStatus());
 			}
 		};

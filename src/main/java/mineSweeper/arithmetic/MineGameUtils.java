@@ -319,7 +319,7 @@ public class MineGameUtils {
 			mineBean.setImageStatus(MineType.MINE_STATUS_BLANK);
 		}
 		if (this.callBack != null) {
-			this.callBack.onRightClick(mineBean, i, j);
+			this.callBack.onRightClick(mineBean, i, j,flagMines);
 		}
 		//checkWin();
 	}
@@ -345,7 +345,7 @@ public class MineGameUtils {
 		if (mineBean != null) {
 			mineBean.setImageStatus(MineType.MINE_STATUS_MINE_CLICK);
 			if (this.callBack != null) {
-				this.callBack.onRightClick(mineBean, i, j);
+				this.callBack.onRightClick(mineBean, i, j,flagMines);
 			}
 		}
 		for (int k1 = 0; k1 < beanArr.length; k1++) {
@@ -358,7 +358,7 @@ public class MineGameUtils {
 						mineBean.setImageStatus(mineBean.getMineCount());
 					}
 					if (this.callBack != null) {
-						this.callBack.onRightClick(mineBean, k1, k2);
+						this.callBack.onRightClick(mineBean, k1, k2,flagMines);
 					}
 				}
 			}
@@ -389,7 +389,7 @@ public class MineGameUtils {
 
 		void onLeftClick(MineBean mineBean, int i, int j);
 
-		void onRightClick(MineBean mineBean, int i, int j);
+		void onRightClick(MineBean mineBean, int i, int j,int flagMines);
 	}
 
 	public void printArrayInt() {
