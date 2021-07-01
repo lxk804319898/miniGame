@@ -242,6 +242,8 @@ public class MineGameUtils {
             }
 
             isFirstLeftClick = false;
+        }else if (isFirstLeftClick) {
+            isFirstLeftClick = false;
         }
 		if (mineBean.isClickOpen()) {
 			return;
