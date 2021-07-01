@@ -29,6 +29,8 @@ public class MineGameUtils {
 
 	private CallBack callBack;
 
+	private boolean isFirstLeftClick = true; //判断是否第一次左键点击
+
 	public CallBack getCallBack() {
 		return callBack;
 	}
@@ -70,6 +72,7 @@ public class MineGameUtils {
 		flagMines = 0;
 		gameStartTime = 0;
 		isGameOver = false;
+		isFirstLeftClick = true;
 		if (this.callBack != null) {
 			this.callBack.onInit(isReset);
 		}
@@ -185,6 +188,61 @@ public class MineGameUtils {
 		if (mineBean == null) {
 			return;
 		}
+
+        //第一次点击中雷，与非雷位置交换
+        if(isFirstLeftClick && mineBean.isMineNow()) {
+            int m = random.nextInt(beanArr.length);
+            int n = random.nextInt(beanArr[0].length);
+            //随机寻找一个非雷位置
+            while(getMineBean(m,n).isMineNow()){
+                m = random.nextInt(beanArr.length);
+                n = random.nextInt(beanArr[0].length);
+            }
+
+            ArrayList<Point> nowNotMineAroundGrids = getAroundGrids(i, j);
+            ArrayList<Point> nowMineAroundGrids = getAroundGrids(m, n);
+
+            MineBean nowMineBean = getMineBean(m,n);
+            nowMineBean.setMineNow();
+            beanArr[m][n] = nowMineBean;
+            int nowNotMineCount = 0;
+            for(int k=0;k<nowNotMineAroundGrids.size();k++){
+                Point tempPoint = nowNotMineAroundGrids.get(k);
+                if(tempPoint == null){
+                    continue;
+                }
+                MineBean notMineAroundBean = getMineBean(tempPoint.x, tempPoint.y);
+                if (notMineAroundBean == null) {
+                    continue;
+                }
+                if(notMineAroundBean.isMineNow()) {
+                    nowNotMineCount++;
+                }else {
+                    int notMineAroundBeanMineCount = notMineAroundBean.getMineCount();
+                    notMineAroundBean.setMineCount(notMineAroundBeanMineCount-1>=0?notMineAroundBeanMineCount-1:0);
+                }
+                beanArr[tempPoint.x][tempPoint.y] = notMineAroundBean;
+            }
+            mineBean.setMineCount(nowNotMineCount);
+            beanArr[i][j] = mineBean;
+
+            for(int z=0;z<nowMineAroundGrids.size();z++){
+                Point tempPoint = nowMineAroundGrids.get(z);
+                if(tempPoint == null){
+                    continue;
+                }
+                MineBean nowMineAroundBean = getMineBean(tempPoint.x, tempPoint.y);
+                if (nowMineAroundBean == null) {
+                    continue;
+                }
+                if(!nowMineAroundBean.isMineNow()){
+                    nowMineAroundBean.setMineCount(nowMineAroundBean.getMineCount()+1);
+                }
+                beanArr[tempPoint.x][tempPoint.y] = nowMineAroundBean;
+            }
+
+            isFirstLeftClick = false;
+        }
 		if (mineBean.isClickOpen()) {
 			return;
 		}

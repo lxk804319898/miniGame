@@ -33,7 +33,7 @@ public class UI {
         //组件3是用户的账号输入框
         JLabel component4=new JLabel("用户账号");
         //组件4是用户的账号输入框右边的提示标签
-        JTextField component5=new JTextField();
+        JPasswordField component5=new JPasswordField();
         //组件5是用户的密码输入框
         JLabel component6=new JLabel("用户密码");
         //组件6是用户的密码输入框右边的提示标签
